@@ -91,5 +91,6 @@ This is a cooperative community aid, not an anti-cheat system.
 Controller ownership, watchdog fallback, network transport, credential reuse,
 repeat installation, and controller delay behavior have automated checks.
 Long-duration multiplayer acceptance is separate and remains pending for 0.3.0.
-Capacity benchmark results will be recorded separately; a requested speed is not
-proof that the hardware sustains it.
+The matched three-pass comparison measured 27.15 UPS locally and 21.92 UPS on
+Netcup. See [capacity evidence and limitations](CAPACITY.md). A requested speed
+is not proof that the hardware sustains it.

@@ -1,0 +1,122 @@
+{
+  "date": "2026-09-19",
+  "local": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "ticks_per_run": 3600,
+    "runs": 3,
+    "elapsed_seconds": 888.72,
+    "timings": [
+      {
+        "average_ms": 36.967,
+        "minimum_ms": 29.323,
+        "maximum_ms": 309.645,
+        "ups_equivalent": 27.05
+      },
+      {
+        "average_ms": 36.637,
+        "minimum_ms": 18.08,
+        "maximum_ms": 306.793,
+        "ups_equivalent": 27.29
+      },
+      {
+        "average_ms": 36.88,
+        "minimum_ms": 29.921,
+        "maximum_ms": 234.292,
+        "ups_equivalent": 27.11
+      }
+    ],
+    "save_sha256": "faf3c6d23d5d26d73493eb99239177dcf8706fbfaa19fa7c1eae12e49a41d69e",
+    "exit_code": 0,
+    "combined_ups": 27.15
+  },
+  "netcup": {
+    "platform": "Linux-6.12.107+deb13-amd64-x86_64-with-glibc2.41",
+    "ticks_per_run": 3600,
+    "runs": 3,
+    "elapsed_seconds": 810.33,
+    "timings": [
+      {
+        "average_ms": 41.29,
+        "minimum_ms": 26.747,
+        "maximum_ms": 417.242,
+        "ups_equivalent": 24.22
+      },
+      {
+        "average_ms": 49.944,
+        "minimum_ms": 34.173,
+        "maximum_ms": 530.72,
+        "ups_equivalent": 20.02
+      },
+      {
+        "average_ms": 45.613,
+        "minimum_ms": 30.182,
+        "maximum_ms": 486.708,
+        "ups_equivalent": 21.92
+      }
+    ],
+    "save_sha256": "faf3c6d23d5d26d73493eb99239177dcf8706fbfaa19fa7c1eae12e49a41d69e",
+    "exit_code": 0,
+    "combined_ups": 21.92
+  },
+  "simulation_checksums": [
+    "1158198439",
+    "1158198439",
+    "1158198439"
+  ],
+  "inputs_verified": true,
+  "comparison_notes": [
+    "Same original save, 45 identical mod ZIPs, identical mod settings, semantically identical enabled-mod lists.",
+    "Three fresh map loads, each measured for 3600 updates. Load time excluded from UPS.",
+    "Windows benchmark mode versus Linux headless. Local graphical game remained at main menu; remote production was paused.",
+    "Not a live multiplayer or long-duration guarantee. Remote host contention and frequency were not sampled during the runs.",
+    "Discarded first local attempt used an evolved test save; it is excluded."
+  ],
+  "mod_sha256": {
+    "adaptive-ups_0.2.0.zip": "29fb3c237a7466b33b11d97fb4e4c9e39f3b3d7d9c43bf6277690327fbead013",
+    "bplib_1.1.6.zip": "78b154d966ea1f5f0f65e672590bb9c5d8e5d1e93ca2ded9e394335b4744e2ee",
+    "CleanedConcrete_2.0.0.zip": "bdbade13cb7e89d0d40d69abf911c25d1134a951dad7952fd995aa61a940c513",
+    "Dirt_Path_2.0.1.zip": "84b2b9410a4933524946c1dbd7358f9db271623bb03a46ee56a5dd3b06af5627",
+    "even-distribution_2.0.2.zip": "4343a01dbeccafb1f879c8665918a5de24553e4f74e13371ae17e19930c5064b",
+    "even-pickier-dollies_2.7.2.zip": "db2560c07fbf8fd6228562079edcc23369273bb653c0f71bb2015fcaea1581f7",
+    "factoryplanner_2.0.43.zip": "514172ebb5a0ed9a506b9edd9548086b4fcc5375319d0a5c778f50c6c6abf6a0",
+    "far-reach_2.0.2.zip": "927a813b607eb151b705af5dde490dc7937c8ceeaa78c11a03785ba88e3c83b8",
+    "Flare Stack_4.0.3.zip": "0a7a5090b8b454878086a6e09eeedb84633837d46c48e42eae3005092b2d9f6f",
+    "flib_0.16.4.zip": "7e92c503db226e91d4ff2b54a69b12c2b24d7357d42ce3783457227d8e4b3c4d",
+    "Flow Control_3.2.3.zip": "3dfdbda2ea03587d784fa18896522c2259a485cb5fe00c9c72a12e327a90f41f",
+    "Inserter_Config_1.1.1.zip": "e7c12f01a46ccf03dd9f7122522e0589a58d7ecb1d984fa480a6dac88ffc2bfb",
+    "LargerLamps-2_0_0.2.2.zip": "0970cf5590cd7e3856ac4dcc7469df965c024a6807c75a8dc2300d8241d2bf3a",
+    "Milestones_1.4.6.zip": "83857ac383d66689cfa8033c6be4cca6b5df6321be8bea086c9a29f64d40b37a",
+    "Mini_Trains_2.0.0.zip": "796d8fc8defd722bcd785889f2cdefa1753c3fabab21d665e1ddb3812b4bcdac",
+    "MouseOverConstruction_2.0.2.zip": "d369010c8fc91e60a1fc660717395e4582fd5ffe05bb3992b70a80900f94a487",
+    "NoJazzPy_1.0.0.zip": "c9b0fcb33ed04103fa33cc747f8ed7d22e2fb300b9c84c6c8ed01eed1d0364fa",
+    "NOverhang_2.0.1.zip": "6674ee338e3c00a8f9eb660d733378705b7df286290069b73fd96760d3b43d8d",
+    "pyalienlife_3.0.59.zip": "ab44458044ef558cc9511ed820e79f981ca69f8a541cd6c9ce6d7de3bb33b89d",
+    "pyalienlifegraphics2_3.0.2.zip": "fa401c0ac5c1dbb454679d0a2d61f3dc1c50d187146d397fe866f76329e7f213",
+    "pyalienlifegraphics3_3.0.4.zip": "79eac9d6f541ba6a96153299f1292e4ec3b47d7fd9e44a48cb7e21ebd6e091e9",
+    "pyalienlifegraphics_3.0.10.zip": "71f363b6509d37f427173050b55a478ae8c88c574dfb153bac12d9e3ea0db14c",
+    "pyalternativeenergy_3.1.35.zip": "34d37b59cd162d3bca88fb6eb30cc35df78d9b209525ebc9ce3f97b6d8539729",
+    "pyalternativeenergygraphics_3.0.5.zip": "f898fc3ca04a95d577a585eb137f0439a2064d160edbd347a311d61952a3636d",
+    "pYBetterItemFluidStorageIcons_1.0.1.zip": "e303b621f9a39def582e08d7b7e37903fbb31694ded06017815502df29066677",
+    "pycoalprocessing_3.0.43.zip": "bc86794b2bb2d5e0344e01d1701bb5aa33c4f202c83f3420c810510c6f8c6e76",
+    "pycoalprocessinggraphics_3.0.9.zip": "b154858eb935e21ca254e2c719d808d562eed15ccdad2e2b905460018847671e",
+    "pycranes-spdfix_1.0.4.zip": "5d64b0a51280bfd8a0e25029c102773dc51d20cb55e0ece1fe43edec935160fb",
+    "pycranes_1.0.5.zip": "6ce2d66cca0540feaa85a1525fc45695a1c3dfa734f2a2b194cdacc611d6570d",
+    "PyEarlyMiniTrainsContinued_2.0.6.zip": "a3dbb7839d51f47947ee853ca36f6b5c0518c38e8e1c9ff316cae19f5716e324",
+    "pyfusionenergy_3.0.16.zip": "dd97fbadab016438cc1b1c9c7050ab76086cc17974f185e22ed20cca7ff21c7b",
+    "pyfusionenergygraphics_3.0.4.zip": "56cb48d5458717ccd145ee1ff7d6b255a9fee9714d400d8aa6b6b839c24a25b3",
+    "pyhightech_3.0.17.zip": "e09a9a923ec5df54e65fb729041c6b879b259851d147a8a67715b100b8adef11",
+    "pyhightechgraphics_3.0.2.zip": "91d28e39b59bec53dbbc83a300fc3b3cb095cf05c1a09b75cb8b93d3b4188a9f",
+    "pyindustry_3.0.19.zip": "17a426403324d6a90a8013566dcd871caa962c35c44276a5b4d1c88291382006",
+    "pyindustrygraphics_3.0.2.zip": "f989c69dcb4119ef495e56bed9be475f2a1edb329059f9c028942b1e2f29ce63",
+    "pymodpack_3.0.0.zip": "1610b0b93b74d5e6c4164e0f14a18ff828ccc4d860fe8e0c086f7dab20d93014",
+    "pypetroleumhandling_3.0.21.zip": "60b3a0e454a35a47e36f176e5c5d85a848bfc278107a91336f0a5fe37d3e36e0",
+    "pypetroleumhandlinggraphics_3.0.5.zip": "8049cd729f8319024d77d1a02b30d04aec8044d35a6010e35a75bb0fd8c96222",
+    "pypostprocessing_3.0.39.zip": "646a577b34d8fd205b044aeec53e029d815b99e4ee5c1b9fccc493915b6c9434",
+    "pyrawores_3.0.24.zip": "118860b5879c6bd38fa13d6ec40807bab7be361d9e646aefcae523d4f2a3a239",
+    "pyraworesgraphics_3.0.4.zip": "1715c790d6797e9354821726e9fb34e7589e885506c74cbd224a0626a810d79a",
+    "RateCalculator_3.3.7.zip": "3da7b1a25d2160b1af5bfd3fb2ed95c851b1012bbb6c4aa86d7caa35f4856b03",
+    "squeak-through-2_0.1.2.zip": "485a4e2d4a5ca0401c33a446ff5228e2655803016fa522293e18efd568679edc",
+    "Todo-List_19.14.0.zip": "93ca52b0396291f5849cd34e88750ccf28e51cf5d5e0c57065f9838efa9a71d3"
+  },
+  "mod_settings_sha256": "c1b66ba768b8a13cfa6a4b56caf6ea0ce79953ae9b78d35b3d30c9a0ebfc85fe"
+}
