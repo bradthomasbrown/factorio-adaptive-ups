@@ -35,7 +35,8 @@ it stuck at 15 despite stable reports. Controller 0.3.0 learns the lowest observ
 delay, keeps it from drifting upward with backlog, and checks recent delay growth.
 Automated checks pass; extended live multiplayer acceptance remains pending.
 
-The current target range remains 15–25. Target UPS is a ceiling requested through
+The target range was subsequently raised to 15–60 for the [live tuning trial](TUNING.md).
+Target UPS is a ceiling requested through
 `game.speed`; measured UPS can be lower. This comparison is not a guarantee of
 long-duration multiplayer performance, and future factory growth can change it.
 

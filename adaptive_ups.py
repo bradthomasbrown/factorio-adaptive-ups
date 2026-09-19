@@ -1,4 +1,4 @@
-"""Adaptive UPS 0.3.0 for Factorio 2.0.73. Python 3.10+."""
+"""Adaptive UPS controller 0.3.1 for Factorio 2.0.73. Python 3.10+."""
 from __future__ import annotations
 
 import argparse
@@ -34,10 +34,17 @@ class Peer:
 class Governor:
     """All time is supplied by caller; production uses only server monotonic time."""
 
-    def __init__(self, floor=15.0, maximum=45.0):
+    def __init__(self, floor=15.0, maximum=45.0, *, healthy_seconds=15.0,
+                 increase_interval=5.0, recovery_seconds=120.0):
         if not 0.6 <= floor <= maximum <= 60:
             raise ValueError("Require 0.6 <= floor <= maximum <= 60")
         self.floor, self.maximum = float(floor), float(maximum)
+        timings = (healthy_seconds, increase_interval, recovery_seconds)
+        if any(not isinstance(v, (int, float)) or not math.isfinite(v) or not 0.1 <= v <= 600 for v in timings):
+            raise ValueError("Controller timing values must be between 0.1 and 600 seconds")
+        self.healthy_seconds = float(healthy_seconds)
+        self.increase_interval = float(increase_interval)
+        self.recovery_seconds = float(recovery_seconds)
         self.target = self.floor
         self.peers: dict[str, Peer] = {}
         self.healthy_since = None
@@ -100,7 +107,7 @@ class Governor:
     def next_increase(self, now):
         if not self.peers or self.healthy_since is None or self.target >= self.maximum:
             return None
-        ready = max(self.healthy_since + 15, self.last_change + 5)
+        ready = max(self.healthy_since + self.healthy_seconds, self.last_change + self.increase_interval)
         if self.target >= self.ceiling and now < self.ceiling_until:
             ready = max(ready, self.ceiling_until)
         return max(0.0, ready - now)
@@ -121,14 +128,14 @@ class Governor:
         if critical:
             if self.target > self.floor:
                 self.ceiling = max(self.floor, min(self.ceiling, self.target * 0.8))
-                self.ceiling_until = now + 120
+                self.ceiling_until = now + self.recovery_seconds
             self.target, self.last_change = self.floor, now
             self.reason = "Fallback: waiting for timely reports from " + ", ".join(sorted(critical))
             self.healthy_since = None
         elif warning:
             if now - self.last_change >= 3:
                 self.target = max(self.floor, round(self.target * 0.8, 2))
-                self.ceiling, self.ceiling_until = self.target, now + 120
+                self.ceiling, self.ceiling_until = self.target, now + self.recovery_seconds
                 self.last_change = now
             self.reason = "Holding or reducing speed: delayed reports from " + ", ".join(sorted(warning))
             self.healthy_since = None
@@ -136,7 +143,7 @@ class Governor:
             if self.healthy_since is None:
                 self.healthy_since = now
             cap = self.maximum if now >= self.ceiling_until else self.ceiling
-            if now - self.healthy_since >= 15 and now - self.last_change >= 5:
+            if now - self.healthy_since >= self.healthy_seconds and now - self.last_change >= self.increase_interval:
                 self.target = min(cap, self.target + 2)
                 self.last_change = now
             if self.target >= self.maximum:
@@ -372,7 +379,10 @@ def run_server(args):
     if len(set(tokens.values())) != len(tokens):
         raise ValueError("Each player needs a different token")
     password = os.environ[config.get("rcon_password_env", "FACTORIO_RCON_PASSWORD")]
-    gov = Governor(config.get("floor_ups", 15), config.get("maximum_ups", 45))
+    gov = Governor(config.get("floor_ups", 15), config.get("maximum_ups", 45),
+                   healthy_seconds=config.get("healthy_seconds", 15),
+                   increase_interval=config.get("increase_interval", 5),
+                   recovery_seconds=config.get("recovery_seconds", 120))
     store = AccessStore(config['access_database']) if config.get('access_database') else None
     coordinator = Coordinator(gov, tokens, store)
     http = ThreadingHTTPServer((config.get("listen_host", "127.0.0.1"), config.get("listen_port", 8765)), make_handler(coordinator))

@@ -147,13 +147,13 @@ class GovernorTests(unittest.TestCase):
                 Governor(floor, maximum)
 
 
-def simulate(capacity_before, capacity_after, change_at=110, duration=400, floor=15):
+def simulate(capacity_before, capacity_after, change_at=110, duration=400, floor=15, maximum=45, **timings):
     """A tick queue, not a UPS sensor: only executed pulse acknowledgements feed back.
 
     Client has unlimited catch-up scheduling up to its supplied capacity. This
     models the proposed signal; it is not a model of Factorio's frame scheduler.
     """
-    g = Governor(floor, 45)
+    g = Governor(floor, maximum, **timings)
     g.roster(["player"], 0)
     server_tick = client_tick = 0.0
     queued = []
@@ -179,6 +179,26 @@ def simulate(capacity_before, capacity_after, change_at=110, duration=400, floor
 
 
 class ClosedLoopTests(unittest.TestCase):
+    def test_fast_profile_reaches_60_but_still_recovers_after_capacity_drop(self):
+        rows = simulate(70, 20, maximum=60, healthy_seconds=1.5, increase_interval=0.5, recovery_seconds=12)
+        self.assertEqual(rows[100]['target'], 60)
+        self.assertLess(max(r['backlog_ticks'] for r in rows), 180)
+        self.assertTrue(any(r['backlog_ticks'] == 0 for r in rows[120:145]))
+        self.assertLessEqual(max(r['backlog_ticks'] for r in rows[-60:]), 60)
+
+    def test_fast_profile_does_not_skip_initial_calibration(self):
+        g = Governor(15, 60, healthy_seconds=1.5, increase_interval=0.5, recovery_seconds=12)
+        g.roster(['player'], 0)
+        for second in range(1, 7):
+            g.ack('player', second, second, second + 0.2)
+            g.step(second + 0.3)
+        self.assertEqual(g.target, 15)
+
+    def test_invalid_tuning_is_rejected(self):
+        for value in (0, -1, float('nan'), float('inf'), 'fast'):
+            with self.assertRaises(ValueError):
+                Governor(15, 60, recovery_seconds=value)
+
     def test_sudden_capacity_drop_clears_backlog(self):
         rows = simulate(50, 20)
         self.assertEqual(rows[100]["target"], 45)

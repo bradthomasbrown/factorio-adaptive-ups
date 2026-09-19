@@ -18,7 +18,28 @@ journalctl -u adaptive-ups -n 30 --no-pager
 adaptive mode is explicitly resumed or Factorio is restarted. `adaptive` restarts
 the controller at fallback. To change the normal range, edit `floor_ups` and
 `maximum_ups` in `/etc/factorio/adaptive.json`, then restart `adaptive-ups`.
-The initial range is 15–25. Lower the floor if a player cannot catch up at 15.
+The current experimental range is 15–60. Lower the floor if a player cannot catch
+up at 15. Raising the maximum does not make the hardware compute faster.
+
+Controller 0.3.1 accepts these additional settings in the same private JSON file:
+
+| Setting | Default when omitted | Current trial |
+|---|---:|---:|
+| `healthy_seconds` | 15 | 1.5 |
+| `increase_interval` | 5 | 0.5 |
+| `recovery_seconds` | 120 | 12 |
+
+Values must be finite numbers from 0.1 to 600 seconds. The controller runs about
+once per second, so a 0.5-second increase interval still means at most one +2 UPS
+step per loop. Initial calibration still requires at least eight acknowledgments
+spanning seven seconds; the twelve-sample window and late-report safeguards are
+unchanged. A recovery countdown begins only once reports permit an increase; it
+is not a promise to speed up twelve seconds after a slowdown. See [trial evidence](TUNING.md).
+
+To return to the previous conservative settings, set the maximum to 25 and remove
+the three timing keys (or set 15, 5, 120), then restart only `adaptive-ups`.
+The game does not need to restart. Keep a root-only configuration backup: this
+file contains reporting credentials and must never be published.
 
 The mod watchdog returns to fallback after 180–210 simulation ticks without an
 owner pulse; at 15 UPS this is at most 14 seconds. It does not run during a pause.

@@ -15,7 +15,7 @@ button,input{font:inherit}button{cursor:pointer;border:0}button:disabled{opacity
 <p><strong>You need <a href="https://factorio.com/download/archive/2.0.73">Factorio 2.0.73 with Space Age</a></strong> (for elevated rails) and Windows.</p>
 <ol>
 <li><strong>Download and open the companion.</strong><br><a class="button" href="/downloads/AdaptiveUPS.exe" download>Download Windows companion</a><br>It detects your Factorio account name and saves its own reporting access automatically. If you have several installations, choose the data folder used by your game. No JSON download or host approval.</li>
-<li><strong>Install the bundled adaptive mod once.</strong><br>With Factorio closed, use <strong>Install bundled adaptive mod</strong> in the companion. Until Mod Portal publication, this supplies our small custom mod. Repeating it safely reports “already installed.”</li>
+<li><strong>Install the bundled adaptive mod once.</strong><br>With Factorio closed, use <strong>Install bundled adaptive mod</strong> in the companion. This supplies our small custom mod; no Mod Portal download is needed. Repeating it safely reports “already installed.”</li>
 <li><strong>Start Factorio and connect yourself.</strong><br>Use <strong>Copy address</strong> in the companion, then Factorio’s <strong>Multiplayer → Connect to address</strong>. Accept mod sync and restart if prompted. The first download is large. Keep the companion open; it changes from “Waiting” to “Connected — reporting simulation steps.”</li>
 </ol>
 <div class="note"><strong>Why keep it open?</strong> Every client simulates the whole factory. If yours processes fewer simulation steps per second than the server, queued steps build up and you fall behind. The companion reports checkpoint timing so the server can slow down before that queue becomes unmanageable.</div>
@@ -26,7 +26,7 @@ button,input{font:inherit}button{cursor:pointer;border:0}button:disabled{opacity
 </details>
 <details><summary>Waiting, slow speed, or the wrong folder?</summary>
 <p>“Waiting” is normal before joining. If it persists in-game, choose the correct data folder: usually <code>%APPDATA%\Factorio</code> for Steam, or your portable installation’s data folder. It contains <code>mods</code> and <code>script-output</code>.</p>
-<p>The configured range is 15–25 UPS. The companion shows measured speed, target speed, delayed or missing reports, and a conditional countdown before an increase. Slow reports can come from a client backlog, network delay, or a stopped companion. A player unable to sustain 15 UPS needs a lower server minimum.</p>
+<p>The target range is 15–60 UPS; actual speed depends on the server and connected computers. The companion shows measured speed, target speed, delayed or missing reports, and a conditional countdown before an increase. Slow reports can come from a client backlog, network delay, or a stopped companion. A player unable to sustain 15 UPS needs a lower server minimum.</p>
 </details>
 <footer>Companion 0.3.0 · Windows x64 · experimental, unsigned build · MIT source<br>
 <a href="https://github.com/bradthomasbrown/factorio-adaptive-ups">Source and build instructions</a>
