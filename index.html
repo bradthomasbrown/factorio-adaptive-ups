@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Play Pyandon · Adaptive UPS</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;color:#e8eee9;background:#101914}*{box-sizing:border-box}body{max-width:760px;margin:auto;padding:48px 24px 40px;line-height:1.6}header{border-bottom:1px solid #34433a;padding-bottom:26px}.eyebrow{color:#9ad7ae;font-size:.78rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}h1{font-size:clamp(2.3rem,7vw,3.3rem);line-height:1.1;margin:14px 0}p{color:#bdccc1}code{color:#ecf7ed;background:#243229;padding:3px 7px;border-radius:4px;overflow-wrap:anywhere}.address{display:inline-block;margin:6px 0;font-size:1.3rem;letter-spacing:.03em}.button{display:inline-block;background:#b9ebad;color:#14220f;padding:12px 18px;border-radius:7px;font-weight:700;text-decoration:none}a{color:#b9ebad}ol{padding-left:26px;margin:28px 0}li{padding:0 0 19px 8px}li::marker{font-weight:700;color:#b9ebad}strong{color:#f0f6f1}.note{padding:16px 20px;border:1px solid #34483a;border-radius:8px}footer{font-size:.83rem;margin-top:30px;color:#92a398}footer a{margin-right:12px}
+</style>
+<style>
+button,input{font:inherit}button{cursor:pointer;border:0}button:disabled{opacity:.6;cursor:wait}label{display:block;font-weight:600;color:#f0f6f1}input{display:block;width:min(100%,360px);padding:10px 12px;background:#18271e;border:1px solid #688c72;border-radius:6px;color:#fff;margin:6px 0 12px}input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #e2f4b4;outline-offset:3px}.enroll{margin-top:14px;padding:18px;background:#192a20;border:1px solid #34483a;border-radius:8px}.enroll p{margin:8px 0 0;font-size:.92rem}.error{color:#ffc5b6}[hidden]{display:none!important}
+</style>
+<header><div class="eyebrow">Pyandon community save · experimental server</div>
+<h1>A huge factory.<br>A playable pace.</h1>
+<p>Simulation speed adapts to connected players. The world pauses when empty and while players join.</p>
+<code class="address">94.16.31.89:34197</code></header>
+<p><strong>You need <a href="https://factorio.com/download/archive/2.0.73">Factorio 2.0.73 with Space Age</a></strong> (for elevated rails) and Windows.</p>
+<ol>
+<li><strong>Download and open the companion.</strong><br><a class="button" href="/downloads/AdaptiveUPS.exe" download>Download Windows companion</a><br>It detects your Factorio account name and saves its own reporting access automatically. If you have several installations, choose the data folder used by your game. No JSON download or host approval.</li>
+<li><strong>Install the bundled adaptive mod once.</strong><br>With Factorio closed, use <strong>Install bundled adaptive mod</strong> in the companion. Until Mod Portal publication, this supplies our small custom mod. Repeating it safely reports “already installed.”</li>
+<li><strong>Start Factorio and connect yourself.</strong><br>Use <strong>Copy address</strong> in the companion, then Factorio’s <strong>Multiplayer → Connect to address</strong>. Accept mod sync and restart if prompted. The first download is large. Keep the companion open; it changes from “Waiting” to “Connected — reporting simulation steps.”</li>
+</ol>
+<div class="note"><strong>Why keep it open?</strong> Every client simulates the whole factory. If yours processes fewer simulation steps per second than the server, queued steps build up and you fall behind. The companion reports checkpoint timing so the server can slow down before that queue becomes unmanageable.</div>
+<details><summary>Why both a mod and a companion? What is sent?</summary>
+<p>The mod writes a tiny local file when your simulation processes a server checkpoint. The companion watches that file and acknowledges its marker over HTTPS. The controller times the round trip on the server. This includes network delay and queued simulation work; it estimates delay, not the exact in-game buffer counter.</p>
+<p>Factorio’s Lua mods cannot make ordinary HTTPS requests. Their code runs inside the shared simulation; the companion reports when your particular computer actually processes a marker. Optional localhost Lua UDP still needs an external program and a special game flag. Reading the marker file needs no launch flags.</p>
+<p>The companion sends your account name, marker session and sequence number, plus its own reporting credential. It extracts your name from <code>player-data.json</code> but never sends your Factorio sign-in token. No research progress, inventory or save file is uploaded.</p>
+</details>
+<details><summary>Waiting, slow speed, or the wrong folder?</summary>
+<p>“Waiting” is normal before joining. If it persists in-game, choose the correct data folder: usually <code>%APPDATA%\Factorio</code> for Steam, or your portable installation’s data folder. It contains <code>mods</code> and <code>script-output</code>.</p>
+<p>The configured range is 15–25 UPS. The companion shows measured speed, target speed, delayed or missing reports, and a conditional countdown before an increase. Slow reports can come from a client backlog, network delay, or a stopped companion. A player unable to sustain 15 UPS needs a lower server minimum.</p>
+</details>
+<footer>Companion 0.3.0 · Windows x64 · experimental, unsigned build · MIT source<br>
+<a href="https://github.com/bradthomasbrown/factorio-adaptive-ups">Source and build instructions</a>
+<a href="/downloads/adaptive-ups_0.2.1.zip">Mod only</a>
+<a href="/downloads/adaptive-ups-source.zip">Source ZIP</a>
+<a href="/downloads/SHA256SUMS.txt">Download hashes</a>
+<a href="/mods.json">Server mod versions</a></footer>
+</html>

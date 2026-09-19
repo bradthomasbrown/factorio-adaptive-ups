@@ -1,0 +1,10 @@
+{
+  "name": "adaptive-ups",
+  "version": "0.2.1",
+  "title": "Adaptive UPS",
+  "author": "punchyfist",
+  "homepage": "https://github.com/bradthomasbrown/factorio-adaptive-ups",
+  "factorio_version": "2.0",
+  "dependencies": ["base >= 2.0.73"],
+  "description": "Adjust multiplayer simulation speed using client checkpoint reports. Requires an external server controller and a player companion. Experimental; does not split or accelerate simulation."
+}

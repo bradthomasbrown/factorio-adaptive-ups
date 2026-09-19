@@ -1,0 +1,12 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.2.1
+Date: 2026-09-19
+  Info:
+    - Prepare public release with author, source link and MIT license.
+    - Simulation code unchanged from 0.2.0.
+---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+Date: 2026-09-19
+  Features:
+    - Deterministic per-client checkpoint markers and server speed commands.
+    - Controller ownership, watchdog fallback and join/leave roster notifications.

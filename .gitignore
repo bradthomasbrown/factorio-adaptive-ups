@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+build/
+dist/
+*.spec
+downloads/
+resources/
+validation-*
+benchmark-*
+*.jsonl
+*.sqlite3*
+player-profile.json
+settings.json
+*.env
